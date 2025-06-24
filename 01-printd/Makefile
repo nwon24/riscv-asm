@@ -3,7 +3,9 @@ AS=$(TGT)-as
 LD=$(TGT)-ld
 QEMU=qemu-riscv64-static
 
-printd: printd.o
-	$(LD) -o $@ $<
-run: printd
+LIB=../libasm.a
+
+main: main.o
+	$(LD) -o $@ $< $(LIB)
+run: main
 	$(QEMU) $<
