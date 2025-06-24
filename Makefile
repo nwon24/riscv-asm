@@ -4,5 +4,5 @@ LD=$(TGT)-ld
 AR=$(TGT)-ar
 QEMU=qemu-riscv64-static
 
-libasm.o: 01-printd/printd.o
-	$(AR) rcs libasm.a 01-printd/printd.o
+libasm.a: 01-printd/printd.o 02-strlen/strlen.o
+	$(AR) rcs $@ $^
