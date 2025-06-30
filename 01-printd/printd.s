@@ -34,14 +34,18 @@ printd:
 3:	
 	mv a0,a1	# reverse string starting at a1 with length t0
 	mv a1,t0
+	addi sp,sp,-8	# Save s0 (as required by calling convention)
+	sd s0,0(sp)
 	mv s0,t0
 	addi sp,sp,-16	# save return address
 	sd ra,8(sp)
 	jal revstr
 	ld ra,8(sp)
 	addi sp,sp,16
-	ld t0,8(sp)	# get len of buffer
+	ld t0,16(sp)	# get len of buffer
 	add t0,t0,s0
+	ld s0,0(sp)	# Restore s0 and stack
+	addi sp,sp,8
 	la a6,buf
 	add a6,a6,t0
 	li a0,'\n'	# put new line

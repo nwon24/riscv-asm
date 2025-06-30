@@ -5,7 +5,9 @@ QEMU=qemu-riscv64-static
 
 LIB=../libasm.a
 
-main: main.o
+main: main.o $(LIB)
 	$(LD) -o $@ $< $(LIB)
 run: main
 	$(QEMU) $<
+$(LIB): printd.o
+	(cd ..; make)
