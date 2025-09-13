@@ -1,5 +1,3 @@
-N=17
-M=323
 .section .text
 .globl _start
 _start:
@@ -7,10 +5,7 @@ _start:
 .option norelax
 	la gp, __global_pointer$
 .option pop
-	li a0,N
-	jal factor
-	jal printd
-	li a0,M
+	jal getd
 	jal factor
 	jal printd
 
