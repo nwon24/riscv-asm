@@ -73,3 +73,21 @@ revstr:
 	addi t2,t2,-1
 	j 1b
 2:	ret
+
+# Print bytes starting at given address
+.globl printb
+printb:
+	addi sp,sp,-16
+	sw ra,4(sp)
+
+	mv t0,a0
+	mv t1,a1
+1:	beqz t1,1f
+	lb a0,0(t0)
+	jal printd
+	addi t0,t0,1
+	addi t1,t1,-1
+	j 1b
+1:	lw ra,4(sp)
+	addi sp,sp,16
+	ret
